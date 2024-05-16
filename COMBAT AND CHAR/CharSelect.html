@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .statsDiv {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .characterDiv {
+            flex: 1;
+            margin-left: 10px;
+        }
+		
+		td {
+			width: 350px;
+			padding: 25px;
+		}
+    </style>
+</head>
+<body onload="load(); stats(0,0)">
+
+<div class="container">
+    <!-- Left Div for Stats Selection -->
+	<center>
+    
+	<table border="1">
+	<tr>
+	<td>
+	<div class="statsDiv">
+        <h2>Stats</h2>
+        <p id="Sstrength">Strength:</p> <button id="btn_strength_minus" onclick="stats(0,-1)">-</button> <button id="btn_strength_plus" onclick="stats(0,1)">+</button></p>
+        <p id="SLuck">Luck:</p> <button id="btn_luck_minus" onclick="stats(1,-1)">-</button> <button id="btn_luck_plus" onclick="stats(1,1)">+</button></p>
+        <p id="Sevasion">Evasion:</p> <button id="btn_evasion_minus" onclick="stats(2,-1)">-</button> <button id="btn_evasion_plus" onclick="stats(2,1)">+</button></p>
+        <p id="Sdexterity">Dexterity:</p> <button id="btn_dexterity_minus" onclick="stats(3,-1)">-</button> <button id="btn_dexterity_plus" onclick="stats(3,1)">+</button></p>
+        <p id="Svitality">Vitality:</p> <button id="btn_vitality_minus" onclick="stats(4,-1)">-</button> <button id="btn_vitality_plus" onclick="stats(4,1)">+</button></p>
+    </div>
+	
+	</td>
+<td>
+    <!-- Right Div for Character Model -->
+    <div class="characterDiv">
+        <h2>Character Class</h2>
+        <input type="radio" id="archer" name="class" onclick="selectClass('archer')"> Archer
+        <input type="radio" id="warrior" name="class" onclick="selectClass('warrior')"> Warrior
+        <input type="radio" id="assassin" name="class" onclick="selectClass('assassin')"> Assassin<br>
+        <img id="characterModel" src="placeholder.jpg" width="300" height="500">
+    </div>
+	
+	</td>
+	</tr>
+	<tr>
+	<td colspan=2>
+	<center>
+	<button id="submit" onclick="Playerstats()">Submit</button>
+	</center>
+	</td>
+	</tr>
+
+	</table>
+ <center>
+</div>
+
+
+<script>
+var health, statpoints = 100;
+var strength1 = 0, luck1 = 0, evasion1 = 0, dexterity1 = 0, vitality1 = 0;
+var statused = 0;
+
+function load() {
+    document.getElementById("submit").disabled = true;
+}
+
+function stats(stats, points) {
+    if (stats === 0) {
+        strength1 += points;
+        statused += points;
+        document.getElementById("Sstrength").innerHTML = "Strength: " + strength1;
+    } else if (stats === 1) {
+        luck1 += points;
+        statused += points;
+        document.getElementById("SLuck").innerHTML = "Luck: " + luck1;
+    } else if (stats === 2) {
+        evasion1 += points;
+        statused += points;
+        document.getElementById("Sevasion").innerHTML = "Evasion: " + evasion1;
+    } else if (stats === 3) {
+        dexterity1 += points;
+        statused += points;
+        document.getElementById("Sdexterity").innerHTML = "Dexterity: " + dexterity1;
+    } else if (stats === 4) {
+        vitality1 += points;
+        statused += points;
+        document.getElementById("Svitality").innerHTML = "Vitality: " + vitality1;
+    }
+
+    if (statused >= 100) {
+        document.getElementById("submit").disabled = false;
+		document.getElementById("btn_strength_plus").disabled = true;
+		document.getElementById("btn_luck_plus").disabled = true;
+		document.getElementById("btn_evasion_plus").disabled = true;
+		document.getElementById("btn_dexterity_plus").disabled = true;
+		document.getElementById("btn_vitality_plus").disabled = true;
+    } else if (statused <= 0) {
+        document.getElementById("submit").disabled = true;
+		document.getElementById("btn_strength_minus").disabled = true;
+		document.getElementById("btn_luck_minus").disabled = true;
+		document.getElementById("btn_evasion_minus").disabled = true;
+		document.getElementById("btn_dexterity_minus").disabled = true;
+		document.getElementById("btn_vitality_minus").disabled = true;
+    } else {
+        document.getElementById("submit").disabled = true;
+		document.getElementById("btn_strength_plus").disabled = false;
+		document.getElementById("btn_luck_plus").disabled = false;
+		document.getElementById("btn_evasion_plus").disabled = false;
+		document.getElementById("btn_dexterity_plus").disabled = false;
+		document.getElementById("btn_vitality_plus").disabled = false;
+		document.getElementById("btn_strength_minus").disabled = false;
+		document.getElementById("btn_luck_minus").disabled = false;
+		document.getElementById("btn_evasion_minus").disabled = false;
+		document.getElementById("btn_dexterity_minus").disabled = false;
+		document.getElementById("btn_vitality_minus").disabled = false;
+    }
+
+
+function selectClass(className) {
+    // Do something with the selected class, like store it
+    console.log("Selected class: " + className);
+}
+
+function Playerstats() {
+    // Do something with the player stats here, like store them or calculate something
+}
+
+function damage() {
+    // Function to handle damage calculation
+}
+</script>
+</body>
+</html>
