@@ -102,7 +102,7 @@ body {
 }
 
 
-table {
+.Mazetable {
   background-image: url('assets/img/Maze.png');
         background-repeat: no-repeat;
         background-size: cover;
