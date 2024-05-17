@@ -1,8 +1,9 @@
 body {
   background-color: black;
-  font-family: ＭＳ Ｐゴシック;
   text-align: center;
 }
+
+
 
 .wrapper-main {
 
@@ -21,17 +22,94 @@ body {
   border: 4px solid blue;
 }
 
+.parentMainClass {
+  
+  position: relative;
+  margin: 0px;
+  width: 97vw;
+  height: 96.5vh;
+  overflow: auto;
+  background-color: black;
+  border: 1px solid blue;
 
+
+}
+
+.leftBricks {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 96.5vh;
+  background-image: url('assets/img/brick.png');
+  background-repeat: repeat-y;
+}
+
+.rightBricks {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 96.5vh;
+  background-image: url('assets/img/brick.png');
+  background-repeat: repeat-y;
+}
+
+.leftData {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  width: 300px;
+  height: 96.5vh;
+}
+
+
+.parentTextLeft {
+  position: relative;
+  left: 5px;
+  width: auto;
+  height: 400px;
+  top: 0px;
+  background-image: url("./assets/img/scroll1.png ");
+  background-repeat: no-repeat;
+
+  background-size: contain;
+}
+
+@font-face {
+  font-family: 'Eleanora';
+  src: url('Eleanora-Regular.eot');
+  src: local('Eleanora Regular'), local('Eleanora-Regular'),
+    url('Eleanora-Regular.eot?#iefix') format('embedded-opentype'),
+    url('Eleanora-Regular.woff2') format('woff2'),
+    url('Eleanora-Regular.woff') format('woff'),
+    url('Eleanora-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.textLeft {
+  font-family: Eleanora;
+  position: absolute;
+  width: 200px;
+  height: 400px;
+  font-size: 11px;
+  margin-top: 30px;
+  margin-left: 50px;
+  border-radius: 20px;
+  background-color: pink 50%;
+}
 
 
 table {
   background-image: url('assets/img/Maze.png');
   background-repeat: no-repeat;
   background-size: cover;
-  max-width: 8700px;
-  max-height: 870px;
-  width: 870px;
-  height: 870px;
+  max-width: 650px;
+  max-height: 650px;
+  width: 650px;
+  height: 650px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -50,212 +128,224 @@ img {
   z-index: 2;
 }
 
-.leftBricks {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 422px;
-  height: 100vh;
-  background-image: url('assets/img/brick.png');
-  background-repeat: repeat-y;
-}
+.divTrial {
+  height: 1080px;
+  width: 1920px;
+  background-color: pink;
 
-.rightBricks {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 422px;
-  height: 100vh;
-  background-image: url('assets/img/brick.png');
-  background-repeat: repeat-y;
-}
 
-.textLeft {
-  position: fixed;
-  left: 52px;
-  width: 316px;
-  height: 550px;
-  top: 30px;
-  border-radius: 20px;
-  background-color: #FFBD59;
 }
 
 .movement {
   position: relative;
-  left: 52px;
-  width: 316px;
-  height: 300px;
-  margin-top: 700px;
+  width: 250px;
+  height: 240px;
+  margin-top: 20px;
+  margin-left: 10px;
   border-radius: 50px;
   background-color: #FFBD59;
 }
 
 .movementUp {
   position: absolute;
-  top:10px;
-  width: 75px;
-  height: 75px;
-  left:120.5px;
+  top: 10px;
+  width: 60px;
+  height: 60px;
+  left: 90.5px;
 }
 
 .movementUp img {
   position: static;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #590707;
 }
 
 .movementDown {
   position: absolute;
-  top:100px;
-  width: 75px;
-  height: 75px;
-  left:120.5px;
+  width: 60px;
+  height: 60px;
+  left: 90.5px;
+  top: 90px;
+
 }
 
 .movementDown img {
   position: static;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #590707;
   transform: rotate(180deg);
 }
 
 .movementLeft {
   position: absolute;
-  top:100px;
-  left: 30px; 
-  width: 75px;
-  height: 75px;
+  left: 10px;
+  width: 60px;
+  height: 60px;
+  top: 90px;
 }
 
 .movementLeft img {
   position: static;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #590707;
   transform: rotate(-90deg);
 }
 
 .movementRight {
   position: absolute;
-  left: 210px;
-  width: 75px;
-  height: 75px;
-  top:100px;
+  left: 170px;
+  width: 60px;
+  height: 60px;
+  top: 90px;
 }
 
 .movementRight img {
   position: static;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #590707;
   transform: rotate(90deg);
 }
 
+
+.rightData {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  width: 300px;
+  height: 96.5vh;
+  /* background-color: blue; */
+}
+
+.characterData {
+  position: static;
+  width: 300px;
+  height: 55.25vh;
+  /* background-color: green; */
+
+}
+
+.characterName {
+  position: absolute;
+  width: 250px;
+  height: 75px;
+  margin-top: 25px;
+  margin-left: 25px;
+  border-radius: 50px;
+  background-color: #FFBD59;
+}
+
 .characterDesign {
-  position: fixed;
-  right: 52px;
-  width: 310px;
-  height: 300px;
-  bottom: 300px;
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  margin-top: 125px;
+  margin-left: 25px;
   border-radius: 50px;
   background-color: #590707;
   border: 5px solid #FFBD59;
 }
 
-.characterName {
-  position: fixed;
-  right: 52px;
-  width: 316px;
-  height: 75px;
-  top: 30px;
-  border-radius: 125px;
-  background-color: #FFBD59;
-}
 
+.health-items-parentClass {
+  position: static;
+  width: 300px;
+  height:19vh;
+ /* background-color: gray; */
+}
 
 .HealthGrouped {
-  position: fixed;
-  right: 52px;
-  width: 316px;
-  height: 158px;
-  bottom: 130px;
+  position: absolute;
+  width: 300px;
+  height: 19vh;
+  left: 0px;
+ /*  background-color: pink; */
 }
 
-.characterHealthFirstBase {
-  height: 158px;
-  width: 316px;
-  border-radius: 45px;
-  background-color: #FFBD59;
-}
 
 .characterHealth {
   position: absolute;
-  top: 30%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
+  width: 250px;
   height: 39px;
-  background-color: #9B0202;
+  background-color: #0c9b02;
   border: 5px solid #000000;
 }
 
 .characterItems {
-  position: absolute;
-  bottom: 30px;
+  display: flex; 
+  justify-content: space-between; 
+  position: static;
+  margin-top: 70px;
   right: 52px;
-  width: 316px;
-  height: 80px;
+  width: 300px;
+  height: 50px;
 }
-
-.itemOne {
-  position: absolute;
-  left: 0px;
-  width: 65px;
-  height: 65px;
-  background-color: #590707;
-  border: 5px solid #FFBD59;
-}
-
-.itemTwo {
-  position: absolute;
-  left: 79px;
-  width: 65px;
-  height: 65px;
-  background-color: #590707;
-  border: 5px solid #FFBD59;
-}
-
-.itemThree {
-  position: absolute;
-  left: 158px;
-  width: 65px;
-  height: 65px;
-  background-color: #590707;
-  border: 5px solid #FFBD59;
-}
-
+.itemOne,
+.itemTwo,
+.itemThree,
 .itemFour {
-  position: absolute;
-  left: 237px;
-  width: 65px;
-  height: 65px;
+  width: 50px;
+  height: 50px;
   background-color: #590707;
   border: 5px solid #FFBD59;
+  margin-left: 10px; 
+  margin-right: 10px;
+}
+.items-fight-parent {
+  position: relative; /* Changed from static to relative */
+  width: 300px;
+  height: 22.25vh;
+  /* background-color: #590707; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.additionalInfo {
-  margin-top: 100px;
-  margin-left: 50px;
-  width: 316px;
-  padding: 10px;
-  background-color: #FFBD59;
-  border-radius: 10px;
+.itemName-parent {
+  height: 11vh;
+  width: 100%; 
+  /* background-color: orange; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.additionalInfo p {
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: #590707;
+.itemName {
+  font-family: Eleanora;
+  font-size: 20px;
+  z-index: 20;
+  color: white; 
+}
+
+.buttonClick {
+  height: 11vh;
+  width: 100%; 
+ /* background-color: brown; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonClick button {
+  height: 5vh;
+  width: 150px;
+  background-color: white;
+
+  /*background-color: violet; */
+}
+
+
+.tableFinalMaze{
+  
+position:absolute;
+z-index: 100;
+
+
 }

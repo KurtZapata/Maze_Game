@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Eleanora';
+    src: url('Eleanora-Regular.eot');
+    src: local('Eleanora Regular'), local('Eleanora-Regular'),
+        url('Eleanora-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Eleanora-Regular.woff2') format('woff2'),
+        url('Eleanora-Regular.woff') format('woff'),
+        url('Eleanora-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
