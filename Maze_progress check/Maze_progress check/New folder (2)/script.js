@@ -97,7 +97,7 @@ function moveImage(event) {
 
 
     if (currentCell === "none") {
-        if (imageLocation.top <= tableLocation.topLeft.y && imageLocation.bottom >= tableLocation.topLeft.y) {
+        if (newPosition.y <= tableLocation.topLeft.y && (newPosition.y + 12) >= tableLocation.topLeft.y) {
             switch (event.key) {
                 case 'w':
                 case 'W':
