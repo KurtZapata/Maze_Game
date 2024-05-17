@@ -400,6 +400,8 @@ function moveImage(event) {
     console.log("Cell Corners:", cellCorners);
     console.log(items);
     interactionChecker();
+    console.log(playerhealth);
+    
 }
 
 function interactionChecker()
@@ -409,6 +411,7 @@ function interactionChecker()
         if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/6.png")' && cellchecker === 0) {
             alert("TRAP");
             document.getElementById("buttonFightPickup").disabled = false;
+            playerhealth-= 10;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/5.png")' && cellchecker === 0) {
@@ -478,7 +481,7 @@ var itemPics = [
     "url('assets/img/key_4.png')"
 ];
 
-var items = [0,0,0,0,0,0,0]
+var items = [1,2,3,4,0,0,0]
 var itemcaro = [0,1,2,3]
 var select = 0;
 function itemselect(x)
@@ -508,12 +511,18 @@ function itemselect(x)
             document.getElementById('item4').style.backgroundColor = "red";
         }
 }
-
+var playerhealth = 100;
 function printitem() {
     document.getElementById('item1').style.backgroundImage = itemPics[itemcaro[0]];
     document.getElementById('item2').style.backgroundImage = itemPics[itemcaro[1]];
     document.getElementById('item3').style.backgroundImage = itemPics[itemcaro[2]];
     document.getElementById('item4').style.backgroundImage = itemPics[itemcaro[3]];
+
+    document.getElementById('item1').innerHTML = items[itemcaro[0]];
+    document.getElementById('item2').innerHTML = items[itemcaro[1]];
+    document.getElementById('item3').innerHTML = items[itemcaro[2]];
+    document.getElementById('item4').innerHTML = items[itemcaro[3]];
+
 }
 
 function itempickup()
@@ -554,6 +563,7 @@ function itempickup()
             document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
         }
         document.getElementById("buttonFightPickup").disabled = false;
+        printitem;
         console.log(items);
 }
 function findCellBorders(cellId) {
@@ -578,15 +588,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var tableCorners = getTableLocation();
     console.log("Table Corner Coordinates:", tableCorners);
     printitem();
-    // Initialize cellCorners with data for all cell IDs
     for (var i = 1; i <= 900; i++) {
         var cellId = 'cell' + i;
         cellCorners[cellId] = getCornerCoordinates(cellId);
     }
     console.log("Cell Corners:", cellCorners);
 });
-
 document.body.addEventListener('keydown', moveImage);
-
-// Focus the document to ensure it receives key events
 document.body.focus();
+
+
+function trapDamage()
+{
+    playerhealth-= 10;
+}
