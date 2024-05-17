@@ -1,10 +1,10 @@
 var tableLocation, imageLocation;
-var currentCell; // Declaring currentCell as a global variable
+var currentCell; 
 var rowLocations = [];
 var columnLocations = [];
-var currentCellBorders; // Define currentCellBorders variable
-var cellCorners = {}; // Define cellCorners variable as an object
-var cellBorders = {}; // Define cellBorders variable as an object
+var currentCellBorders;
+var cellCorners = {};
+var cellBorders = {}; 
 
 function calculateInitialPositions() {
     tableLocation = getTableLocation();
@@ -430,6 +430,18 @@ function interactionChecker()
             alert("DOOR");
             cellchecker = 1;
         }
+        else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/8.gif")' && cellchecker === 0) {
+            alert("COMBAT");
+            cellchecker = 1;
+        }
+        else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/9.gif")' && cellchecker === 0) {
+            alert("COMBAT");
+            cellchecker = 1;
+        }
+        else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/1.gif")' && cellchecker === 0) {
+            alert("COMBAT");
+            cellchecker = 1;
+        }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === "") {
             cellchecker = 0;
         }
@@ -493,3 +505,680 @@ document.body.addEventListener('keydown', moveImage);
 
 // Focus the document to ensure it receives key events
 document.body.focus();
+
+// Para sa Combat at stat setting
+
+/* 
+
+var statpoints = 150;
+var statused = 0;
+var CskillLeft;
+var CskillRight;
+var Mobstats = [30, 10, 30, 30, 30];
+var Mobhealth = 150 + (Mobstats[4] * 3), MobMax = Mobhealth;
+var strength1 = 0, luck1 = 0, evasion1 = 0, armor1 = 0, vitality1 = 0;
+var streduc = 1, arreduc = 1, mobstreduc = 1, mobarreduc = 1;
+var health = 200 + (vitality1 * 15), maxhealth = health;
+
+function load() {
+    document.getElementById("submit").disabled = true;
+}
+
+function stats(stats, points) {
+    if (stats === 0) {
+        strength1 += points;
+        statused += points;
+        document.getElementById("Sstrength").innerHTML = "Strength: " + strength1;
+    } else if (stats === 1) {
+        luck1 += points;
+        statused += points;
+        document.getElementById("SLuck").innerHTML = "Luck: " + luck1;
+    } else if (stats === 2) {
+        evasion1 += points;
+        statused += points;
+        document.getElementById("Sevasion").innerHTML = "Evasion: " + evasion1;
+    } else if (stats === 3) {
+        dexterity1 += points;
+        statused += points;
+        document.getElementById("Sdexterity").innerHTML = "Dexterity: " + dexterity1;
+    } else if (stats === 4) {
+        vitality1 += points;
+        statused += points;
+        document.getElementById("Svitality").innerHTML = "Vitality: " + vitality1;
+    }
+
+    if (statused >= 100) {
+        document.getElementById("submit").disabled = false;
+		document.getElementById("btn_strength_plus").disabled = true;
+		document.getElementById("btn_luck_plus").disabled = true;
+		document.getElementById("btn_evasion_plus").disabled = true;
+		document.getElementById("btn_dexterity_plus").disabled = true;
+		document.getElementById("btn_vitality_plus").disabled = true;
+    } else if (statused <= 0) {
+        document.getElementById("submit").disabled = true;
+		document.getElementById("btn_strength_minus").disabled = true;
+		document.getElementById("btn_luck_minus").disabled = true;
+		document.getElementById("btn_evasion_minus").disabled = true;
+		document.getElementById("btn_dexterity_minus").disabled = true;
+		document.getElementById("btn_vitality_minus").disabled = true;
+    } else {
+        document.getElementById("submit").disabled = true;
+		document.getElementById("btn_strength_plus").disabled = false;
+		document.getElementById("btn_luck_plus").disabled = false;
+		document.getElementById("btn_evasion_plus").disabled = false;
+		document.getElementById("btn_dexterity_plus").disabled = false;
+		document.getElementById("btn_vitality_plus").disabled = false;
+		document.getElementById("btn_strength_minus").disabled = false;
+		document.getElementById("btn_luck_minus").disabled = false;
+		document.getElementById("btn_evasion_minus").disabled = false;
+		document.getElementById("btn_dexterity_minus").disabled = false;
+		document.getElementById("btn_vitality_minus").disabled = false;
+    }
+
+}
+function selectClass(className) {
+    // Do something with the selected class, like store it
+    console.log("Selected class: " + className);
+}
+
+function Playerstats() {
+    // Do something with the player stats here, like store them or calculate something
+}
+
+function damage() {
+    // Function to handle damage calculation
+}
+
+    var CskillLeft;
+    var CskillRight;
+    var Mobstats = [30, 10, 30, 30, 30];
+    var Mobhealth = 150 + (Mobstats[4] * 3), MobMax = Mobhealth;
+    var strength1 = 35, luck1 = 25, evasion1 = 10, armor1 = 15, vitality1 = 50;
+    var streduc = 1, arreduc = 1, mobstreduc = 1, mobarreduc = 1;
+    var health = 200 + (vitality1 * 15), maxhealth = health;
+
+    function stats() {
+      document.getElementById("Pstats1").innerHTML = "Strength: " + strength1 + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Luck: " + luck1;
+      document.getElementById("Pstats2").innerHTML = "Evasion: " + evasion1 + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Armor: " + armor1;
+      document.getElementById("Pstats3").innerHTML = "Vitality: " + vitality1;
+      document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+
+      document.getElementById("Astats1").innerHTML = "Strength: " + Mobstats[0] + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Luck: " + Mobstats[1];
+      document.getElementById("Astats2").innerHTML = "Evasion: " + Mobstats[2] + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Armor: " + Mobstats[3];
+      document.getElementById("Astats3").innerHTML = "Vitality: " + Mobstats[4];
+      document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+
+
+      document.getElementById("PPattack1").innerHTML = '<input type="radio" name="left-option" id="Pattack1">' + PskillName[CharacterChoice][0];
+      document.getElementById("PPattack2").innerHTML = '<input type="radio" name="left-option" id="Pattack2">' + PskillName[CharacterChoice][1];
+      document.getElementById("PPattack3").innerHTML = '<input type="radio" name="left-option" id="Pattack3">' + PskillName[CharacterChoice][2];
+      document.getElementById("PPattack4").innerHTML = '<input type="radio" name="left-option" id="Pattack4">' + PskillName[CharacterChoice][3];
+
+      document.getElementById("Cattack1").innerHTML = AskillName[enemyChoice][0];
+      document.getElementById("Cattack2").innerHTML = AskillName[enemyChoice][1];
+      document.getElementById("Cattack3").innerHTML = AskillName[enemyChoice][2];
+      document.getElementById("Cattack4").innerHTML = AskillName[enemyChoice][3];
+
+
+      document.getElementById("right").src = "rogue.gif";
+      document.getElementById("left").src = "rogue.gif";
+    }
+
+    function NselectSkill(x) {
+      CskillRight = x;
+    }
+
+    var PskillName = [["slash", "Shield Bash", "Whirlwind Strike", "Earthshaker Slam"],
+    ["Quick Thrust", "Shield Bash", "Venomous Blade", "Death's Embrace"],
+    ["Arrow Shot", "Multi-Shot", "Piercing Shot", "Rain of Arrows"]]
+
+    var AskillName = [["Stab", "Shield Bash", "Acid Bomb", "Goblin Rush"],
+    ["Piercing Arrow", "Quick Shot", "Poison Tip", "Volley of Arrows"],
+    ["Dagger Stab", "Sneak Attack", "Toxic Blade", "Shadow Ambush"]]
+
+    var CharacterChoice = 1, enemyChoice = 1;
+    function selectSkill(side) {
+      if (side === 'left') {
+        if (document.getElementById("Pattack1").checked) { CskillLeft = 1; }
+        else if (document.getElementById("Pattack2").checked) { CskillLeft = 2; }
+        else if (document.getElementById("Pattack3").checked) { CskillLeft = 3; }
+        else if (document.getElementById("Pattack4").checked) { CskillLeft = 4; }
+        else { document.getElementById("outputLeft").innerHTML = "Please Select A Skill"; }
+      }
+    }
+    function showSkillDescription(side) {
+      if (side === 'left') {
+        document.getElementById("outputLeft").innerHTML = "";
+        if (CskillLeft === 1) { document.getElementById("outputLeft").innerHTML = PskillName[CharacterChoice][0]; }
+        else if (CskillLeft === 2) { document.getElementById("outputLeft").innerHTML =  PskillName[CharacterChoice][1]; }
+        else if (CskillLeft === 3) { document.getElementById("outputLeft").innerHTML =  PskillName[CharacterChoice][2]; }
+        else if (CskillLeft === 4) { document.getElementById("outputLeft").innerHTML =  PskillName[CharacterChoice][3]; }
+      } else if (side === 'right') {
+        document.getElementById("outputRight").innerHTML = "";
+        if (CskillRight === 1) { document.getElementById("outputRight").innerHTML =  AskillName[enemyChoice][0]; }
+        else if (CskillRight === 2) { document.getElementById("outputRight").innerHTML =  AskillName[enemyChoice][1]; }
+        else if (CskillRight === 3) { document.getElementById("outputRight").innerHTML =  AskillName[enemyChoice][2]; }
+        else if (CskillRight === 4) { document.getElementById("outputRight").innerHTML =  AskillName[enemyChoice][3]; }
+      }
+    }
+
+    function checkhealth() {
+      if (health <= 0)
+      {
+        alert('PATAHY KANA HEHEHEHE');
+      }
+      else if (Mobhealth <= 0)
+      {
+        alert('Panalo pa hayop');
+      }
+    }
+    function attack(side) {
+      if (side === 'left') {
+        PlayerWarrior();
+      }
+      console.log(AIattackCounter % 4);
+      AIattackAssassin();
+      checkhealth();
+    }
+
+    function PlayerWarrior() {
+      document.getElementById("outputLeft").innerHTML = "";
+      if (CskillLeft === 1) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((15 + (3.5 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Slash <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((15 + (3.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Slash <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 2) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (3.5 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Shield Bash <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (3.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Shield Bash <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((30 + (4.5 * strength1)) * (Mobstats[3] / 100)) * 1.6);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Whirlwind Strike <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((30 + (4.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Whirlwind Strike <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 4) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((40 + ((6 * strength1)) * (Mobstats[3] / 100))) * 1.8);
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Earthshaker Slam: <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+        else {
+          var damage = parseInt((40 + (5 * strength1)) * (Mobstats[3] / 100));
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Earthshaker Slam: <br> Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+      }
+      else {
+        document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+      }
+    }
+
+    function PlayerAssassin() {
+      document.getElementById("outputLeft").innerHTML = "";
+      if (CskillLeft === 1) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (4 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Quick Thrust<br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (4 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Quick Thrust <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 2) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (4.5 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Shadow Strike <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (4.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Shadow Strike <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.5 * strength1)) * (Mobstats[3] / 100)) * 1.6);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Venomous Blade <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (2.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Venomous Blade <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 4) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((20 + (5 * strength1)) * (Mobstats[3] / 100)) * 1.8);
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Death's Embrace: <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+        else {
+          var damage = parseInt((20 + (5 * strength1)) * (Mobstats[3] / 100));
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Death's Embrace: <br> Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+      }
+    }
+
+    function PlayerArcher() {
+      document.getElementById("outputLeft").innerHTML = "";
+      if (CskillLeft === 1) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.5 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Arrow Shot<br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (2.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Arrow Shot <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 2) {
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.5 * strength1)) * (Mobstats[3] / 100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Multi-Shot <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (2.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Multi-Shot <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > Mobstats[2] + (Mobstats[0] * 0.2)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.5 * strength1)) * (Mobstats[3] / 100)) * 1.6);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Piercing Shot <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+          else {
+            var damage = parseInt((10 + (2.5 * strength1)) * (Mobstats[3] / 100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Piercing Shot <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+          }
+        }
+        else {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+      }
+      else if (CskillLeft === 4) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((20 + (5 * strength1)) * (Mobstats[3] / 100)) * 1.8);
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Rain of Arrows: <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+        else {
+          var damage = parseInt((20 + (5 * strength1)) * (Mobstats[3] / 100));
+          Mobhealth -= damage;
+          document.getElementById("outputLeft").innerHTML = "Rain of Arrows: <br> Damage Dealt: " + damage;
+          document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax;
+        }
+      }
+    }
+
+    var AIattackCounter = 1;
+
+    function AIattackWarior() {
+      document.getElementById("outputRight").innerHTML = "";
+      if (AIattackCounter % 4 === 1 || AIattackCounter % 4 === 2) {
+        var skillpick = Math.floor(Math.random() * 2) + 1;
+        if (skillpick === 1) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.5 * Mobstats[0])) * (armor1 * arreduc / 100)) * 1.5);
+              arreduc = 1;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Stab <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.5 * Mobstats[0])) * ((armor1 * arreduc) / 100));
+              health -= damage;
+              arreduc = 1;
+              document.getElementById("outputRight").innerHTML = "Stab <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+        else if (skillpick === 2) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+              arreduc = .7;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Scratch <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+              health -= damage;
+              arreduc = .7;
+              document.getElementById("outputRight").innerHTML = "Scratch <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+      }
+      else if (AIattackCounter % 4 === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > evasion1 + (luck1 * .05)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((15 + 2.8 * (Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+            arreduc = 1;
+            health -= damage;
+            document.getElementById("outputRight").innerHTML = "Acid Bomb <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+          else {
+            var damage = parseInt((15 + (2.8 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+            health -= damage;
+            arreduc = 1;
+            document.getElementById("outputRight").innerHTML = "Acid Bomb <br> Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+        }
+        else {
+          document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+          arreduc = 1;
+        }
+      }
+      else if (AIattackCounter % 4 === 0) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50)) * 1.5);
+          arreduc = 1;
+          health -= damage;
+          document.getElementById("outputRight").innerHTML = "Goblin Rush <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+        else {
+          var damage = parseInt((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50));
+          health -= damage;
+          arreduc = 1;
+          document.getElementById("outputRight").innerHTML = "Goblin Rush <br> Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+      }
+      AIattackCounter++;
+    }
+
+    function AIattackArcher() {
+      document.getElementById("outputRight").innerHTML = "";
+      if (AIattackCounter % 4 === 1 || AIattackCounter % 4 === 2) {
+        var skillpick = Math.floor(Math.random() * 2) + 1;
+        if (skillpick === 1) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.5 * Mobstats[0])) * (armor1 * arreduc / 100)) * 1.5);
+              arreduc = 1;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Piercing Arrow <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.5 * Mobstats[0])) * ((armor1 * arreduc) / 100));
+              health -= damage;
+              arreduc = 1;
+              document.getElementById("outputRight").innerHTML = "Quick Shot <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+        else if (skillpick === 2) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+              arreduc = 1;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Quick Shot <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+              health -= damage;
+              arreduc = 1;
+              document.getElementById("outputRight").innerHTML = "Quick Shot <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+      }
+      else if (AIattackCounter % 4 === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > evasion1 + (luck1 * .05)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((15 + 2.8 * (Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+            arreduc = .5;
+            health -= damage;
+            document.getElementById("outputRight").innerHTML = "You have been Poisoned: your armor has been reduced for the next turn <br> Poison Tip <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+          else {
+            var damage = parseInt((15 + (2.8 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+            health -= damage;
+            arreduc = 0.5;
+            document.getElementById("outputRight").innerHTML = "You have been Poisoned: your armor has been reduced for the next turn <br>Poison Tip <br> Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+        }
+        else {
+          document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+          arreduc = 1;
+        }
+      }
+      else if (AIattackCounter % 4 === 0) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50)) * 1.5);
+          arreduc = 1;
+          health -= damage;
+          document.getElementById("outputRight").innerHTML = "Volley of Arrows <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+        else {
+          var damage = parseInt((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50));
+          health -= damage;
+          arreduc = 1;
+          document.getElementById("outputRight").innerHTML = "Volley of Arrows <br> Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+      }
+      AIattackCounter++;
+    }
+
+    function AIattackAssassin() {
+      document.getElementById("outputRight").innerHTML = "";
+      if (AIattackCounter % 4 === 1 || AIattackCounter % 4 === 2) {
+        var skillpick = Math.floor(Math.random() * 2) + 1;
+        if (skillpick === 1) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.5 * Mobstats[0])) * (armor1 * arreduc / 100)) * 1.5);
+              arreduc = 1;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Dagger Stab <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.5 * Mobstats[0])) * ((armor1 * arreduc) / 100));
+              health -= damage;
+              arreduc = 1;
+              document.getElementById("outputRight").innerHTML = "Dagger Stab <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+        else if (skillpick === 2) {
+          if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+            if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+              var damage = parseInt(((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+              arreduc = 1;
+              health -= damage;
+              document.getElementById("outputRight").innerHTML = "Sneak Attack <br> Critical Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+            else {
+              var damage = parseInt((10 + (2.3 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+              health -= damage;
+              arreduc = 1;
+              document.getElementById("outputRight").innerHTML = "Sneak Attack <br> Damage Dealt: " + damage;
+              document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+            }
+          }
+          else {
+            document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+            arreduc = 1;
+          }
+        }
+      }
+      else if (AIattackCounter % 4 === 3) {
+        if ((Math.floor(Math.random() * 200) + 1) > evasion1 + (luck1 * .05)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((20 + 3.1 * (Mobstats[0])) * ((armor1 * arreduc) / 50)) * 1.5);
+            arreduc = .6;
+            health -= damage;
+            document.getElementById("outputRight").innerHTML = "You have been Poisoned: your armor has been reduced for the next turn <br> Toxic Blade Critical Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+          else {
+            var damage = parseInt((20 + (3.1 * Mobstats[0])) * ((armor1 * arreduc) / 50));
+            health -= damage;
+            arreduc = .6;
+            document.getElementById("outputRight").innerHTML = "Toxic Blade <br> Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+          }
+        }
+        else {
+          document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+          arreduc = 1;
+        }
+      }
+      else if (AIattackCounter % 4 === 0) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50)) * 1.5);
+          arreduc = 1;
+          health -= damage;
+          document.getElementById("outputRight").innerHTML = "Shadow Ambush <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+        else {
+          var damage = parseInt((30 + (4 * (Mobstats[0]))) * ((armor1 * arreduc) / 50));
+          health -= damage;
+          arreduc = 1;
+          document.getElementById("outputRight").innerHTML = "Shadow Ambush <br> Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth;
+        }
+      }
+      AIattackCounter++;
+    }
+
+*/
