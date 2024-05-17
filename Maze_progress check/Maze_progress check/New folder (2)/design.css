@@ -271,9 +271,9 @@ img {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
+  width: 90%;
   height: 39px;
-  background-color: #0c9b02;
+  background: linear-gradient(to right, #0c9b02 70%, red 70%); 
   border: 5px solid #000000;
 }
 
@@ -294,6 +294,9 @@ img {
   height: 50px;
   background-color: #590707;
   border: 5px solid #FFBD59;
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-left: 10px; 
   margin-right: 10px;
 }

@@ -94,8 +94,6 @@ function moveImage(event) {
             Cellnum = 0;
         }
     }
-
-
     if (currentCell === "none") {
         if (newPosition.y <= tableLocation.topLeft.y && (newPosition.y + 12) >= tableLocation.topLeft.y) {
             switch (event.key) {
@@ -109,6 +107,7 @@ function moveImage(event) {
                             break;
                         }
                     }
+                    document.getElementById('up').style.backgroundColor ='black';
                     break;
                 case 's':
                 case 'S':
@@ -399,6 +398,7 @@ function moveImage(event) {
         cellCorners[cellId] = getCornerCoordinates(cellId);
     }
     console.log("Cell Corners:", cellCorners);
+    console.log(items);
     interactionChecker();
 }
 
@@ -408,30 +408,39 @@ function interactionChecker()
     console.log(image);
         if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/6.png")' && cellchecker === 0) {
             alert("TRAP");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/5.png")' && cellchecker === 0) {
             alert("HEALTH POTION");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/4.png")' && cellchecker === 0) {
             alert("STRENGTH POTION");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/3.png")' && cellchecker === 0) {
             alert("EXCALIBUR");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
-        else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7.png")' && cellchecker === 0) {
+        else if ((document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_1.png")' || document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_2.png")' 
+            || document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_3.png")' || document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_4.png")')
+            && cellchecker === 0) {
             alert("KEY");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/2.png")' && cellchecker === 0) {
             alert("DOOR");
+            document.getElementById("buttonFightPickup").disabled = false;
             cellchecker = 1;
         }
         else if (document.getElementById("cell" + Cellnum).style.backgroundImage === "") {
             cellchecker = 0;
+            document.getElementById("buttonFightPickup").disabled = true;
         }
 }
 
@@ -459,7 +468,94 @@ function findCurrentCell(imageLocation) {
     }
     return "none";
 }
+var itemPics = [
+    "url('assets/img/3.png')", 
+    "url('assets/img/4.png')", 
+    "url('assets/img/5.png')", 
+    "url('assets/img/key_1.png')", 
+    "url('assets/img/key_2.png')", 
+    "url('assets/img/key_3.png')", 
+    "url('assets/img/key_4.png')"
+];
 
+var items = [0,0,0,0,0,0,0]
+var itemcaro = [0,1,2,3]
+var select = 0;
+function itemselect(x)
+{
+    document.getElementById('item1').style.backgroundColor = "#590707";
+    document.getElementById('item2').style.backgroundColor = "#590707";
+    document.getElementById('item3').style.backgroundColor = "#590707";
+    document.getElementById('item4').style.backgroundColor = "#590707";
+    if (x === 0)
+        {
+            select = itemcaro[0];
+            document.getElementById('item1').style.backgroundColor = "red";
+        }
+    else if (x === 1)
+        {
+            select = itemcaro[1];
+            document.getElementById('item2').style.backgroundColor = "red";
+        }
+    else if (x === 2)
+        {
+            select = itemcaro[2];
+            document.getElementById('item3').style.backgroundColor = "red";
+        }
+    else if (x === 3)
+         {
+            select = itemcaro[3];
+            document.getElementById('item4').style.backgroundColor = "red";
+        }
+}
+
+function printitem() {
+    document.getElementById('item1').style.backgroundImage = itemPics[itemcaro[0]];
+    document.getElementById('item2').style.backgroundImage = itemPics[itemcaro[1]];
+    document.getElementById('item3').style.backgroundImage = itemPics[itemcaro[2]];
+    document.getElementById('item4').style.backgroundImage = itemPics[itemcaro[3]];
+}
+
+function itempickup()
+{
+    if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/3.png")')
+        {
+            items[0] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/4.png")')
+        {
+            items[1] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';  
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage = 'url("assets/img/5.png")')
+        {
+            items[2] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_1.png")')
+        {
+            items[3] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_2.png")')
+        {
+            items[4] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_3.png")')
+        {
+            items[5] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
+        }
+    else if (document.getElementById("cell" + Cellnum).style.backgroundImage === 'url("assets/img/7_4.png")')
+        {
+            items[6] ++;
+            document.getElementById("cell" + Cellnum).style.backgroundImage = 'none';        
+        }
+        document.getElementById("buttonFightPickup").disabled = false;
+        console.log(items);
+}
 function findCellBorders(cellId) {
     var cell = document.getElementById(cellId);
     if (!cell) {
@@ -478,9 +574,10 @@ function findCellBorders(cellId) {
 document.addEventListener('DOMContentLoaded', function () {
     calculateInitialPositions();
     calculateTableLocations();
+    document.getElementById("buttonFightPickup").disabled = true;
     var tableCorners = getTableLocation();
     console.log("Table Corner Coordinates:", tableCorners);
-
+    printitem();
     // Initialize cellCorners with data for all cell IDs
     for (var i = 1; i <= 900; i++) {
         var cellId = 'cell' + i;
