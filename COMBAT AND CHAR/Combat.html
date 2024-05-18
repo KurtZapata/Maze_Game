@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divs with Images, Radio Buttons, and Buttons</title>
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    text-align: center;
+  }
+  .content {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .content img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .radio-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin-top: 10px;
+  }
+  .buttons {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .output {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 50px;
+    background-color: #f9f9f9;
+  }
+  .right-labels {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  .outputLeft {
+    margin-left: 20px;
+  }
+  .outputRight {
+    margin-right: 20px;
+  }
+</style>
+</head>
+<body onload="stats()">
+
+<div class="container">
+  <div class="content" id="leftCharacter">
+    <h3>CHARACTER LEFT</h3>
+    <h6 id="Phealth">Health</h6>
+    <p id="Pstats1">stat1 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  stat4</p>
+    <p id="Pstats2">stat2 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  stat5</p>
+    <p id="Pstats3">stat3</p>
+    <img src="left_image.jpg" alt="Character Model" id="left">
+    <div class="radio-group">
+      <label><input type="radio" name="left-option" id="Pattack1">Option 1</label>
+      <label><input type="radio" name="left-option" id="Pattack2">Option 2</label>
+      <label><input type="radio" name="left-option" id="Pattack3">Option 3</label>
+      <label><input type="radio" name="left-option" id="Pattack4">Option 4</label>
+    </div>
+    <br><br>
+    <div class="buttons">
+      <button onclick="selectSkill('left'); showSkillDescription('left')">Skill Description</button> &nbsp&nbsp&nbsp&nbsp
+      <button onclick="selectSkill('left'); attack('left')">Attack</button>
+    </div>
+  </div>
+
+  <div class="content" id="rightCharacter">
+    <h3>CHARACTER RIGHT</h3>
+    <h6 id="Ahealth">Health</h6>
+    <p id="Astats1">stat1 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  stat4</p>
+    <p id="Astats2">stat2 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  stat5</p>
+    <p id="Astats3">stat3</p>
+    <img src="right_image.jpg" alt="Character Model" id="right">
+    <div class="right-labels">
+      <label for="attack1" id="Cattack1" onclick="NselectSkill(1); showSkillDescription('right')">Attack 1</label>
+      <label for="attack2" id="Cattack2" onclick="NselectSkill(2); showSkillDescription('right')">Attack 2</label>
+      <label for="attack3" id="Cattack3" onclick="NselectSkill(3); showSkillDescription('right')">Attack 3</label>
+      <label for="attack4" id="Cattack4" onclick="NselectSkill(4); showSkillDescription('right')">Attack 4</label>
+    </div>
+    <br><br>
+  </div>
+</div>
+<div class="container">
+  <div class="content" id="outputLeft">DESCRIPTION LANG</div>
+  <div class="content" id="outputRight">DESCRIPTION LANG</div>
+</div>
+
+<script>
+  var CskillLeft;
+  var CskillRight;
+  var Mobstats = [30, 10, 30, 30, 30];
+  var Mobhealth = 150 + (Mobstats[4]*3.5), MobMax = Mobhealth;
+  var strength1 = 35, luck1 = 25, evasion1 = 10, armor1 = 15, vitality1 = 50;
+  var streduc = 1, arreduc = 1, mobstreduc = 1, mobarreduc = 1;
+  var health = 50 + (vitality1 * 2.5), maxhealth = health;
+
+  function stats() {
+    document.getElementById("Pstats1").innerHTML = "Strength: " + strength1 + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Luck: " + luck1 ;
+    document.getElementById("Pstats2").innerHTML = "Evasion: " + evasion1 + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Armor: " + armor1 ;
+    document.getElementById("Pstats3").innerHTML = "Vitality: " + vitality1 ;
+    document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+
+    document.getElementById("Astats1").innerHTML = "Strength: " + Mobstats[0] + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Luck: " + Mobstats[1] ;
+    document.getElementById("Astats2").innerHTML = "Evasion: " + Mobstats[2] + " &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Armor: " + Mobstats[3] ;
+    document.getElementById("Astats3").innerHTML = "Vitality: " + Mobstats[4] ;
+    document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax; 
+
+    document.getElementById("right").src = "rogue.gif";
+    document.getElementById("left").src = "rogue.gif";
+  }
+  
+  function NselectSkill(x) {
+    CskillRight = x;
+  }
+
+  function selectSkill(side) {
+    if (side === 'left') {
+      if (document.getElementById("Pattack1").checked) { CskillLeft = 1; }
+      else if (document.getElementById("Pattack2").checked) { CskillLeft = 2; }
+      else if (document.getElementById("Pattack3").checked) { CskillLeft = 3; }
+      else if (document.getElementById("Pattack4").checked) { CskillLeft = 4; }
+      else { document.getElementById("outputLeft").innerHTML = "Please Select A Skill"; }
+    }
+  }
+
+  function showSkillDescription(side) {
+    if (side === 'left') {
+      document.getElementById("outputLeft").innerHTML = "";
+      if (CskillLeft === 1) { document.getElementById("outputLeft").innerHTML = "Left Skill 1"; }
+      else if (CskillLeft === 2) { document.getElementById("outputLeft").innerHTML = "Left Skill 2"; }
+      else if (CskillLeft === 3) { document.getElementById("outputLeft").innerHTML = "Left Skill 3"; }
+      else if (CskillLeft === 4) { document.getElementById("outputLeft").innerHTML = "Left Skill 4"; }
+    } else if (side === 'right') {
+      document.getElementById("outputRight").innerHTML = "";
+      if (CskillRight === 1) { document.getElementById("outputRight").innerHTML = "Right Skill 1"; }
+      else if (CskillRight === 2) { document.getElementById("outputRight").innerHTML = "Right Skill 2"; }
+      else if (CskillRight === 3) { document.getElementById("outputRight").innerHTML = "Right Skill 3"; }
+      else if (CskillRight === 4) { document.getElementById("outputRight").innerHTML = "Right Skill 4"; }
+    }
+  }
+
+  function attack(side) {
+    if (side === 'left') {
+      document.getElementById("outputLeft").innerHTML = "";
+      if (CskillLeft === 1) {
+
+        if ((Math.floor(Math.random() * 100) + 1) > Mobstats[2] + (Mobstats[0] * 0.2) )
+        {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50)
+          {
+            var damage = parseInt(((10 + (1.5 * strength1)) * (Mobstats[3]/100)) * 1.5);
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Slash <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax; 
+          }
+          else
+          {
+            var damage = parseInt((10 + (1.5 * strength1)) * (Mobstats[3]/100));
+            Mobhealth -= damage;
+            document.getElementById("outputLeft").innerHTML = "Slash <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + Mobhealth + "/" + MobMax; 
+          }
+          
+        }
+        else 
+        {
+          document.getElementById("outputLeft").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        }
+        
+      }
+      else if (CskillLeft === 2) { 
+        document.getElementById("outputLeft").innerHTML = "Left Attack 2"; 
+      }
+      else if (CskillLeft === 3) { document.getElementById("outputLeft").innerHTML = "Left Attack 3"; }
+      else if (CskillLeft === 4) { document.getElementById("outputLeft").innerHTML = "Left Attack 4"; }
+    } 
+    console.log(AIattackCounter%4);
+    AIattack();
+  }
+
+  var AIattackCounter = 1;
+
+  function AIattack() {
+    document.getElementById("outputRight").innerHTML = "";
+    if (AIattackCounter%4 === 1 || AIattackCounter%4 === 2 ) {
+      var skillpick = Math.floor(Math.random() * 2) + 1;
+      if (skillpick === 1) {
+        if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.5 * Mobstats[0])) * (armor1*arreduc/100)) * 1.5);
+            arreduc = 1;
+            health -= damage;
+            document.getElementById("outputRight").innerHTML = "Stab <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+          }
+          else {
+            var damage = parseInt((10 + (2.5 * Mobstats[0])) * ((armor1*arreduc)/100));
+            health -= damage;
+            arreduc = 1;
+            document.getElementById("outputRight").innerHTML = "Stab <br> Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+          }
+        }
+        else {
+          document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+          arreduc = 1;
+        }
+      }
+      else if (skillpick === 2) {
+        if ((Math.floor(Math.random() * 100) + 1) > evasion1 + (luck1 * .05)) {
+          if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+            var damage = parseInt(((10 + (2.3 * Mobstats[0])) * ((armor1*arreduc)/50)) * 1.5);
+            arreduc = .7;
+            health -= damage;
+            document.getElementById("outputRight").innerHTML = "Scratch <br> Critical Damage Dealt: " + damage;
+            document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+          }
+          else {
+            var damage = parseInt((10 + (2.3 * Mobstats[0])) * ((armor1*arreduc)/50));
+            health -= damage;
+            arreduc = .7;
+            document.getElementById("outputRight").innerHTML = "Scratch <br> Damage Dealt: " + damage;
+            document.getElementById("Ahealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+          }
+        }
+        else {
+          document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+          arreduc = 1;
+        }
+      }
+    }
+    else if (AIattackCounter%4 === 3) {
+      if ((Math.floor(Math.random() * 200) + 1) > evasion1 + (luck1 * .05)) {
+        if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+          var damage = parseInt(((15 + 2.8 * (Mobstats[0])) * ((armor1*arreduc)/50)) * 1.5);
+          arreduc = 1;
+          health -= damage;
+          document.getElementById("outputRight").innerHTML = "Acid Bomb <br> Critical Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+        }
+        else {
+          var damage = parseInt((15 + (2.8 * Mobstats[0])) * ((armor1*arreduc)/50));
+          health -= damage;
+          arreduc = 1;
+          document.getElementById("outputRight").innerHTML = "Acid Bomb <br> Damage Dealt: " + damage;
+          document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+        }
+      }
+      else {
+        document.getElementById("outputRight").innerHTML = "Attack has been evaded <br> Damage Dealt: " + 0;
+        arreduc = 1;
+      }
+    }
+    else if (AIattackCounter % 4 === 0) {
+      if ((Math.floor(Math.random() * 100) + 1) >= 50) {
+        var damage = parseInt(((30 + (4 * (Mobstats[0]))) * ((armor1*arreduc)/50)) * 1.5);
+        arreduc = 1;
+        health -= damage;
+        document.getElementById("outputRight").innerHTML = "Goblin Rush <br> Critical Damage Dealt: " + damage;
+        document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+      }
+      else {
+        var damage = parseInt((30 + (4 * (Mobstats[0]))) * ((armor1*arreduc)/50));
+        health -= damage;
+        arreduc = 1;
+        document.getElementById("outputRight").innerHTML = "Goblin Rush <br> Damage Dealt: " + damage;
+        document.getElementById("Phealth").innerHTML = "Health: " + health + "/" + maxhealth; 
+      }
+    }
+
+    AIattackCounter++;
+  }
+</script>
+</body>
+</html>
